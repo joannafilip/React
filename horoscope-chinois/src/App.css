@@ -26,6 +26,10 @@ h1 {
 .more {
   margin-left: 45%;
 }
+/* .less {
+  visibility: hidden;
+} */
+
 .close {
   position: absolute;
   margin-left: 92%;

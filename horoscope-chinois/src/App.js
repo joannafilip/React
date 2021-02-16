@@ -22,6 +22,7 @@ function App() {
   const [signe, setSigne] = useState(null);
   const [vis, setVis] = useState(false);
   const [desc, setDesc] = useState(true);
+  const [x, y] = useState(false);
   function handleSubmit() {
     setVis(true);
     const yearModulo = Number(year) % 12;
@@ -32,7 +33,7 @@ function App() {
     <div>
 
       <div>
-        <input
+        Enter your birthdate: <input
           className="text-center font-bold"
           type="number"
           id="year"
@@ -40,20 +41,25 @@ function App() {
           value={year}
           onChange={handleChange}
         />
-        <button type="submit" onClick={handleSubmit}>Valider</button>
+        <button type="submit" onClick={handleSubmit}>confirm</button>
       </div>
       <div className="flex flex-wrap">{bd}</div>
       <Modal
         visible={vis}
-        hide={() => setVis(false)}
-        more={() => setDesc(false)}
+        visibleBtn={x}
+        // viz={x}
+        hide={() => setVis(false) && y(true)}
+        more={() => setDesc(false) && y(false)}
+        less={() => setDesc(true) && y(false)}
+
       >
         <div>
           {signe && (
           <div>
             <h1>{signe.nom}</h1>
-            <div>{signe.description.substr(0, 100)}</div>
-            {desc ? <div /> : <div>{signe.description.substr(100, 600)}</div>}
+            <div>
+              {desc ? signe.description.substr(0, 100) : signe.description}
+            </div>
             <img src={`/images/${signe.image}`} alt="" />
           </div>
           )}
