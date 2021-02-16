@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState, nom, image } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Happy from './Happy';
+import Medal from './Medal';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    {/* <div className="flex flex-wrap">
+      <Medal nom="Belgique" image="/images/belgique.png" />
+      <Medal nom="France" image="/images/france.png" />
+      <Medal nom="Corée" image="/images/corée.png" />
+      <Medal nom="USA" image="/images/usa.jpg" />
+      <Medal nom="Laos" image="/images/laos.png" />
+    </div> */}
     <App />
   </React.StrictMode>,
   document.getElementById('root'),

@@ -7,32 +7,25 @@ import Bd from './Bd';
 function App() {
   const bd = Bd.map((element) => (
     <Element
-      nom={element.nom}
+      key={element.nom}
       image={element.image}
       description={element.description}
       modulo={element.modulo}
     />
   ));
 
-  // récupérer l'input
   const [year, setYear] = useState('');
   function handleChange(event) {
     setYear(event.target.value);
   }
 
-  const [signe, setSigne] = useState([]);
+  const [signe, setSigne] = useState(null);
   const [vis, setVis] = useState(false);
-
+  const [desc, setDesc] = useState(true);
   function handleSubmit() {
     setVis(true);
     const yearModulo = Number(year) % 12;
-    Bd.map((element) => (
-      yearModulo === element.modulo ? setSigne(
-        [<div>{element.nom}</div>, <div>{Math.trunc(element.description.lenght > 150, element.description) }</div>,
-          <img src={`/images/${element.image}`} alt="" />,
-        ],
-      ) : false
-    ));
+    setSigne(Bd.find((element) => yearModulo === element.modulo));
   }
 
   return (
@@ -50,9 +43,20 @@ function App() {
         <button type="submit" onClick={handleSubmit}>Valider</button>
       </div>
       <div className="flex flex-wrap">{bd}</div>
-      <Modal visible={vis}>
+      <Modal
+        visible={vis}
+        hide={() => setVis(false)}
+        more={() => setDesc(false)}
+      >
         <div>
-          <div>{signe}</div>
+          {signe && (
+          <div>
+            <h1>{signe.nom}</h1>
+            <div>{signe.description.substr(0, 100)}</div>
+            {desc ? <div /> : <div>{signe.description.substr(100, 600)}</div>}
+            <img src={`/images/${signe.image}`} alt="" />
+          </div>
+          )}
         </div>
       </Modal>
     </div>
