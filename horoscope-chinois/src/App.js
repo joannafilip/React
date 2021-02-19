@@ -31,7 +31,6 @@ function App() {
 
   return (
     <div>
-
       <div>
         Enter your birthdate: <input
           className="text-center font-bold"
