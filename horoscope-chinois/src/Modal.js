@@ -1,19 +1,27 @@
-const Modal = ({
-  children, visible, hide, fermer, more, less,
-}) => {
-  const popup = `popup ${visible ? 'block' : 'hidden'}`;
-  // const nom = `more ${visibleBtn ? 'hidden' : 'visible'}`;
-  // const nom1 = `less ${visibleBtn ? 'visible' : 'hidden'}`;
+import { useState } from 'react';
 
+const Modal = ({
+  children, visible, hide, fermer, more,
+}) => {
+  const popup = `popup text-white ${visible ? 'block' : 'hidden'}`;
+  const [buttonM, setButtonM] = useState(false);
+  function ChangeButton() {
+    more();
+    setButtonM(!buttonM);
+  }
+  function ChangeButtonX() {
+    setButtonM(false);
+    hide();
+    more();
+  }
   return (
     <div className={popup}>
       {fermer ? null : (
-        <button className="close" onClick={hide} type="button">X</button>
+        <button className="close" onClick={ChangeButtonX} type="button">X</button>
       )}
       {children}
-      <button className="more" onClick={more} type="button">more</button>
+      <button className="more" onClick={ChangeButton} type="button">{buttonM ? 'less' : 'more'}</button>
       <br />
-      <button className="more" onClick={less} type="button">less</button>
     </div>
   );
 };
